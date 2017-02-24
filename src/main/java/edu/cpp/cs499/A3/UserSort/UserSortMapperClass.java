@@ -17,7 +17,7 @@ public class UserSortMapperClass extends Mapper<LongWritable, Text, IntWritable,
     @Override
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
         String[] input = value.toString().split(Misc.TAB);
-        if (input.length == Misc.SORTED_LIST_COL) {
+        if (input.length == Misc.PROCESSED_LIST_COL) {
             context.write(new IntWritable(Integer.parseInt(input[1])), new Text(input[0]));
         }
     }
