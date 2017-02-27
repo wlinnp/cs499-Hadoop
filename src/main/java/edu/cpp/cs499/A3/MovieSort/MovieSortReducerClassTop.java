@@ -1,5 +1,6 @@
 package edu.cpp.cs499.A3.MovieSort;
 
+import edu.cpp.cs499.A3.TopTen;
 import edu.cpp.cs499.Misc;
 import org.apache.hadoop.io.FloatWritable;
 import org.apache.hadoop.io.Text;
@@ -12,7 +13,7 @@ import java.io.IOException;
  *         2/23/17.
  */
 public class MovieSortReducerClassTop extends Reducer<FloatWritable, Text,  FloatWritable, Text> {
-    private static int topLines = MovieSortDriverTop.getTopLines();
+    private static int topLines = TopTen.getInstance().getCount();
     @Override
     protected void reduce(FloatWritable key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
         StringBuilder result = new StringBuilder();
