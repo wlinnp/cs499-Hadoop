@@ -19,8 +19,22 @@ public class MovieSortReducerClassTop extends Reducer<FloatWritable, Text,  Floa
         for (Text each : values) {
             result.append(each.toString()).append(Misc.PIPE);
         }
-        if (topLines-- > 0) {
             context.write(key, new Text(result.toString()));
+    }
+
+    @Override
+    public void run(Context context) throws IOException, InterruptedException {
+        this.setup(context);
+        try {
+            while(context.nextKey()) {
+                if (topLines-- > 0) {
+                    this.reduce(context.getCurrentKey(), context.getValues(), context);
+                } else {
+                    break;
+                }
+            }
+        } finally {
+            this.cleanup(context);
         }
     }
 }

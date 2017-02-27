@@ -18,10 +18,23 @@ public class UserSortReducerClassTop extends Reducer<IntWritable, Text,  IntWrit
         StringBuilder result = new StringBuilder();
         for (Text each : values) {
             result.append(each.toString()).append(Misc.COMMA);
-
         }
-        if (maxItems-- > 0) {
-            context.write(key, new Text(result.toString()));
+        context.write(key, new Text(result.toString()));
+    }
+
+    @Override
+    public void run(Context context) throws IOException, InterruptedException {
+        this.setup(context);
+        try {
+            while(context.nextKey()) {
+                if (maxItems-- > 0) {
+                    this.reduce(context.getCurrentKey(), context.getValues(), context);
+                } else {
+                    break;
+                }
+            }
+        } finally {
+            this.cleanup(context);
         }
     }
 }
