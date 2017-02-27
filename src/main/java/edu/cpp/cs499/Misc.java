@@ -2,6 +2,12 @@ package edu.cpp.cs499;
 
 import org.apache.hadoop.io.IntWritable;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
+
 /**
  * @author waiphyo
  *         2/23/17.
@@ -23,5 +29,13 @@ public class Misc {
     }
     public static boolean isPositiveFloat(final String input) {
         return input.matches("(^\\d+$)|(^\\d+\\.\\d+$)");
+    }
+
+    public static void copyFiles(String sourcePath, String destPath) throws IOException {
+        FileChannel source=new FileInputStream(new File(sourcePath)).getChannel();
+        FileChannel desti=new FileOutputStream(new File(destPath)).getChannel();
+        desti.transferFrom(source, 0, source.size());
+        source.close();
+        desti.close();
     }
 }
