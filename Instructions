@@ -23,15 +23,17 @@ Job 7 -
 hadoop jar 499A3/Hadoop-0.0.1-SNAPSHOT.jar edu.cpp.cs499.A3.MovieSort.MovieSortDriver 499A3/MovieMappingRes/part-r-00000 499A3/MovieSortRes
 --> get highest to lowest average ratings and movie names
 =================================================
+
+===================================================
+Cascaded Jobs
+-------------
+hadoop jar 499A3/Hadoop-0.0.1-SNAPSHOT.jar edu.cpp.cs499.A3.MovieDriverTop 499A3/TrainingRatings.txt 499A3/movie_titles.txt 499A3/AllOutput 10 10
+
 Files
 -----
-UserCount: Result file for Job 1
-UserSortTopTen: Result file for Job 2
-UserSort: Result file for Job 3
-MovieRatings: Result file for Job 4
-MovieSort: Result file for Job 7
-MovieRatingsNames: Result file for Job 5
-MovieSortTopTen: Result file for Job 6
+Copied 2 files from output
+MoviesSortingTop: Top Average Rating Movies
+UserSortingTop: Top users with highest numbers of votes
 
 
 
